@@ -15,7 +15,7 @@ public class OperatorControlIntake extends Command {
     }
 
     protected void execute() {
-    	Robot.intake.OperatorControl(OI.xboxController, OI.joystickAttack);
+    	Robot.intake.OperatorControl(OI.logitechController, OI.joystickAttack);
     }
 
     protected boolean isFinished() {

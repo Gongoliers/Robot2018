@@ -11,11 +11,13 @@ public class StopClimber extends Command {
     }
 
     protected void initialize() {
-    	Robot.climber.stop();
+    	Robot.climber.stopTop();
+    	Robot.climber.stopBottom();
     }
 
     protected void execute() {
-    	Robot.climber.stop();
+    	Robot.climber.stopTop();
+    	Robot.climber.stopBottom();
    }
 
     protected boolean isFinished() {
@@ -26,6 +28,7 @@ public class StopClimber extends Command {
    }
 
     protected void interrupted() {
-    	Robot.climber.stop();
-   }
+    	Robot.climber.stopTop();
+    	Robot.climber.stopBottom();
+  }
 }

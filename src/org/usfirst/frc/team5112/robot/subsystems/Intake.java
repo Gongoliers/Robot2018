@@ -1,12 +1,12 @@
 package org.usfirst.frc.team5112.robot.subsystems;
 
+import org.usfirst.frc.team5112.robot.LogitechController;
 import org.usfirst.frc.team5112.robot.RobotMap;
 import org.usfirst.frc.team5112.robot.commands.intake.OperatorControlIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -82,18 +82,18 @@ public class Intake extends Subsystem {
 
 	// Allows xbox controller's right joystick's Y movement to control intake wheels
 	// in teleop
-	public void OperatorControl(XboxController xboxController, Joystick joystick) {
-		if (xboxController.getXButton()) {
-			if (xboxController.getRawAxis(1) > 0.1) {
-				innerMotorController.set(xboxController.getRawAxis(1));
-				outerMotorController.set(xboxController.getRawAxis(1));
-			} else if (xboxController.getRawAxis(1) < -0.1) {
-				innerMotorController.set(xboxController.getRawAxis(1) * innerMultiplier);
-				outerMotorController.set(xboxController.getRawAxis(1) * outerMultiplier);
-			} else if (xboxController.getRawAxis(0) < -0.1) {
-				clockwise(xboxController.getRawAxis(0) * rotateMultiplier);
-			} else if (xboxController.getRawAxis(0) > 0.1) {
-				counterclockwise(xboxController.getRawAxis(0) * rotateMultiplier*-1);
+	public void OperatorControl(LogitechController controller, Joystick joystick) {
+		if (controller.getRawButtonPressed(3)) {
+			if (controller.getRawAxis(1) > 0.1) {
+				innerMotorController.set(controller.getRawAxis(1));
+				outerMotorController.set(controller.getRawAxis(1));
+			} else if (controller.getRawAxis(1) < -0.1) {
+				innerMotorController.set(controller.getRawAxis(1) * innerMultiplier);
+				outerMotorController.set(controller.getRawAxis(1) * outerMultiplier);
+			} else if (controller.getRawAxis(0) < -0.1) {
+				clockwise(controller.getRawAxis(0) * rotateMultiplier);
+			} else if (controller.getRawAxis(0) > 0.1) {
+				counterclockwise(controller.getRawAxis(0) * rotateMultiplier*-1);
 			} else if (joystick.getY() > 0.1) {
 				counterclockwise(joystick.getY() * elevatorJoystickMultiplier * -1 - 0.1);
 			} else {
@@ -101,14 +101,14 @@ public class Intake extends Subsystem {
 			}
 		}
 		else {
-			if (xboxController.getRawAxis(1) > 0.1) {
-				outerMotorController.set(xboxController.getRawAxis(1));
-			} else if (xboxController.getRawAxis(1) < -0.1) {
-				outerMotorController.set(xboxController.getRawAxis(1) * innerMultiplier);
-			} else if (xboxController.getRawAxis(0) < -0.1) {
-				clockwise(xboxController.getRawAxis(0) * rotateMultiplier);
-			} else if (xboxController.getRawAxis(0) > 0.1) {
-				clockwise(xboxController.getRawAxis(0) * rotateMultiplier);
+			if (controller.getRawAxis(1) > 0.1) {
+				outerMotorController.set(controller.getRawAxis(1));
+			} else if (controller.getRawAxis(1) < -0.1) {
+				outerMotorController.set(controller.getRawAxis(1) * innerMultiplier);
+			} else if (controller.getRawAxis(0) < -0.1) {
+				clockwise(controller.getRawAxis(0) * rotateMultiplier);
+			} else if (controller.getRawAxis(0) > 0.1) {
+				clockwise(controller.getRawAxis(0) * rotateMultiplier);
 			} else if (joystick.getY() > 0.1) {
 				out(joystick.getY() * elevatorJoystickMultiplier * -1 - 0.1);
 			} else {

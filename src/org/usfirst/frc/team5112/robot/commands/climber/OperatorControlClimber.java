@@ -15,7 +15,7 @@ public class OperatorControlClimber extends Command {
     }
 
     protected void execute() {
-    	Robot.climber.operatorControl(OI.xboxController);
+    	Robot.climber.operatorControl(OI.logitechController);
     }
 
     protected boolean isFinished() {

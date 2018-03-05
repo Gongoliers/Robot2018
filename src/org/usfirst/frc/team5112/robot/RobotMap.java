@@ -17,10 +17,9 @@ public class RobotMap {
 	public static VictorSP intakeRightInnterMotorControler;
 	public static VictorSP elevatorLeftMotorController;
 	public static VictorSP elevatorRightMotorController;
-	public static VictorSP climberLeftMotorController;
-	public static VictorSP climberRightMotorController;
+	public static VictorSP climberTopMotorController;
+	public static VictorSP climberBottomMotorController;
 	
-	public static SpeedControllerGroup climberMotorController;
 	public static SpeedControllerGroup elevatorMotorController;
 	public static SpeedControllerGroup intakeInnerMotorController;
 	public static SpeedControllerGroup intakeOuterMotorController;
@@ -44,8 +43,8 @@ public class RobotMap {
 		intakeRightInnterMotorControler = new VictorSP(5);
 		elevatorLeftMotorController = new VictorSP(6);
 		elevatorRightMotorController = new VictorSP(7);
-		climberLeftMotorController = new VictorSP(8);
-		climberRightMotorController = new VictorSP(9);
+		climberTopMotorController = new VictorSP(8);
+		climberBottomMotorController = new VictorSP(9);
 		
 		encoderLeft = new Encoder(1, 2);
 		encoderRight = new Encoder(3, 4);
@@ -62,9 +61,8 @@ public class RobotMap {
 		diffDrive.setExpiration(0.1);
 		diffDrive.setMaxOutput(1.0);
 		
-		climberLeftMotorController.setInverted(false);
-		climberRightMotorController.setInverted(true);
-		climberMotorController = new SpeedControllerGroup(climberLeftMotorController, climberRightMotorController);
+		climberTopMotorController.setInverted(false);
+		climberBottomMotorController.setInverted(true);
 		
 		elevatorLeftMotorController.setInverted(false);
 		elevatorRightMotorController.setInverted(true);
