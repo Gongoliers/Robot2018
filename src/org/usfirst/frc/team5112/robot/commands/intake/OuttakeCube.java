@@ -4,9 +4,9 @@ import org.usfirst.frc.team5112.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Outtake extends Command {
+public class OuttakeCube extends Command {
 
-    public Outtake() {
+    public OuttakeCube() {
     	requires(Robot.intake);
     }
 

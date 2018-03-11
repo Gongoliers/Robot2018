@@ -8,12 +8,17 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * Drives forwards at 40% speed for 5 seconds before stopping during auto.
  */
-public class AutoBaselineCommand extends CommandGroup {
+public class AutoBaselineCommand extends AutoCommand {
 
     public AutoBaselineCommand() {
     	
-    	Robot.drivetrain.speed = 0.4;
-    	addSequential(new Forwards(), 5);
+    	Robot.drivetrain.speed = 0.7;
+    	addSequential(new Forwards(), 3);
     	
     }
+
+	@Override
+	public void init() {
+		
+	}
 }

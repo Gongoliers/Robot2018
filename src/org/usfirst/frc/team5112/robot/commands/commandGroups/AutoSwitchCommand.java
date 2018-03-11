@@ -1,22 +1,142 @@
 package org.usfirst.frc.team5112.robot.commands.commandGroups;
 
 import org.usfirst.frc.team5112.robot.Robot;
+import org.usfirst.frc.team5112.robot.commands.drivetrain.Forwards;
+import org.usfirst.frc.team5112.robot.commands.elevator.ElevatorReverse;
+import org.usfirst.frc.team5112.robot.commands.elevator.RaiseToSwitch;
+import org.usfirst.frc.team5112.robot.commands.elevator.ToggleCubePossession;
+import org.usfirst.frc.team5112.robot.commands.elevator.ToggleElevatorUse;
+import org.usfirst.frc.team5112.robot.commands.intake.OuttakeCube;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import com.thegongoliers.pathFollowing.FollowPathCommand;
+import com.thegongoliers.pathFollowing.Path;
 
 /**
  * Places a pre-loaded power cube into the scale.
  * @author Nicholas Bottone
  */
-public class AutoSwitchCommand extends CommandGroup {
+public class AutoSwitchCommand extends AutoCommand {
 
-    public AutoSwitchCommand() {
+	private void startRightGoRight() {
+		Path path = new Path(Robot.drivetrain);
+		path.addStraightAway(16);
+		path.addRotation(90);
+		path.addStraightAway(67.5);
+		path.addRotation(-90);
+		
+		Path path2 = new Path(Robot.drivetrain);
+		path2.addStraightAway(136);
+		
+		addSequential(new FollowPathCommand(path));
+		addSequential(new RaiseToSwitch()); 
+		addSequential(new FollowPathCommand(path2));
+		addSequential(new OuttakeCube());
+	}
+
+	private void startRightGoLeft() {
+		Path path = new Path(Robot.drivetrain);
+		path.addStraightAway(16);
+		path.addRotation(-90);
+		path.addStraightAway(137.5);
+		path.addRotation(90);
+		
+		Path path2 = new Path(Robot.drivetrain);
+		path2.addStraightAway(136);
+		
+		addSequential(new FollowPathCommand(path));
+		addSequential(new RaiseToSwitch());
+		addSequential(new FollowPathCommand(path2));
+		addSequential(new OuttakeCube());
+	}
+
+	private void startCenterGoRight() {
+		Path path = new Path(Robot.drivetrain);
+		path.addStraightAway(16);
+		path.addRotation(90);
+		path.addStraightAway(28);
+		path.addRotation(-90);
+		
+		Path path2 = new Path(Robot.drivetrain);
+		path2.addStraightAway(136);
+		
+		addSequential(new FollowPathCommand(path));
+		addSequential(new RaiseToSwitch()); // TODO
+		addSequential(new FollowPathCommand(path2));
+		addSequential(new OuttakeCube());
+	}
+
+	private void startCenterGoLeft() {
+		Path path = new Path(Robot.drivetrain);
+		path.addStraightAway(16);
+		path.addRotation(-90);
+		path.addStraightAway(30.5);
+		path.addRotation(90);
+		
+		Path path2 = new Path(Robot.drivetrain);
+		path2.addRotation(136);
+		
+		addSequential(new FollowPathCommand(path));
+		addSequential(new RaiseToSwitch()); // TODO
+		addSequential(new FollowPathCommand(path2));
+		addSequential(new OuttakeCube());
+	}
+
+	private void startLeftGoRight() {
+		Path path = new Path(Robot.drivetrain);
+		path.addStraightAway(16);
+		path.addRotation(90);
+		path.addStraightAway(137.5);
+		path.addRotation(-90);
+		
+		Path path2 = new Path(Robot.drivetrain);
+		path2.addStraightAway(136);
+		
+		addSequential(new FollowPathCommand(path));
+		addSequential(new RaiseToSwitch()); // TODO
+		addSequential(new FollowPathCommand(path2));
+		addSequential(new OuttakeCube());
+	}
+
+	private void startLeftGoLeft() {
+		Path path = new Path(Robot.drivetrain);
+		path.addStraightAway(16);
+		path.addRotation(90);
+		path.addStraightAway(38);
+		path.addRotation(-90);
+		
+		Path path2 = new Path(Robot.drivetrain);
+		path2.addStraightAway(136);
+		
+		addSequential(new FollowPathCommand(path));
+		addSequential(new RaiseToSwitch()); // TODO
+		addSequential(new FollowPathCommand(path2));
+		addSequential(new OuttakeCube());
+	}
+
+	@Override
+	public void init() {
+		char start = Robot.startingPos;
+    	char switc = Robot.plateStates[0];
+
+    	System.out.println(start);
+    	System.out.println(switc);
     	
-//    	// TODO
-//    	
-//    	char start = Robot.startingPos;
-//    	char switc = Robot.plateStates[0];
-//    	
+    	if(start == switc) {
+    		addSequential(new ToggleCubePossession());
+    		addSequential(new ToggleElevatorUse());
+    		addSequential(new ElevatorReverse(), 1.5);
+    		System.out.println("If 1 Called");
+    		
+    	}
+    	Robot.drivetrain.speed = 0.55;
+
+    	addSequential(new Forwards(), 3);
+
+    	if(start == switc) {
+    		addSequential(new OuttakeCube(),3);
+    		System.out.println("If 2 Called");
+    	}
+    	
 //    	switch (start) {
 //    	
 //    	case 'L':
@@ -35,36 +155,5 @@ public class AutoSwitchCommand extends CommandGroup {
 //    		break;
 //    		
 //    	}
-//    	
-//    }
-//
-//	private void startRightGoRight() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	private void startRightGoLeft() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	private void startCenterGoRight() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	private void startCenterGoLeft() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	private void startLeftGoRight() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	private void startLeftGoLeft() {
-//		// TODO Auto-generated method stub
-		
 	}
 }

@@ -33,7 +33,23 @@ public class Climber extends Subsystem {
 	public void stopTop() {
 		topMotorController.stopMotor();
 	}
+	
+	public void runBottCW() {
+		bottomMotorController.set(0.6);
+	}
 
+	public void runBottCWW() {
+		bottomMotorController.set(-0.6);
+	}
+	
+	public void runTopCW() {
+		topMotorController.set(0.3);
+	}
+
+	public void runTopCWW() {
+		topMotorController.set(-0.3);
+	}
+	
 	// Rotates climber winch clockwise
 	public void rotateBottomClockwise(double speed) {
 		topMotorController.set(speed);
@@ -52,19 +68,21 @@ public class Climber extends Subsystem {
 	// Allows climber winch to be controller by xbox controller's left joystick's Y
 	// movement in teleop
 	public void operatorControl(LogitechController controller) {
-		if (controller.getRawButton(4)) {
-			topMotorController.set(0.3);
-		} else if (controller.getRawButton(1)) {
-			topMotorController.set(-0.3);
-		} else {
-			topMotorController.stopMotor();
-		}
-		if(controller.getPOV() == 0) {
-			bottomMotorController.set(0.3);
-		} else if (controller.getPOV() == 180) {
-			bottomMotorController.set(-0.3);
-		} else {
-			bottomMotorController.stopMotor();
-		}
+//		if (controller.getRawButton(4)) {
+//			topMotorController.set(0.3);
+//		} else if (controller.getRawButton(1)) {
+//			topMotorController.set(-0.3);
+//		} else {
+//			topMotorController.stopMotor();
+//		}
+//		if(controller.getPOV() == 0) {
+//			bottomMotorController.set(0.3);
+//		} else if (controller.getPOV() == 180) {
+//			bottomMotorController.set(-0.3);
+//		} else {
+		bottomMotorController.stopMotor();
+		topMotorController.stopMotor();
+		
+//		}
 	}
 }

@@ -72,6 +72,12 @@ public class OI {
 		//Climber Commands
 		SmartDashboard.putData("Stop Climber", new StopClimber());
 		
+		logitechController.buttonA.whileHeld(new RunClimbBottomCW());
+		logitechController.buttonY.whileHeld(new RunClimbBottomCWW());
+		logitechController.buttonStart.whileHeld(new RunClimbTopCW());
+		logitechController.buttonBack.whileHeld(new RunClimbTopCWW());
+		
+		
 		//Drivetrain Commands
 		SmartDashboard.putData("Drivetrain Backwards", new Backwards());
 		SmartDashboard.putData("Drivetrain Forwards", new Forwards());
@@ -94,8 +100,8 @@ public class OI {
 		//Intake Commands
 		SmartDashboard.putData("Decrease Intake Speed", new DecreaseSpeedIntake());
 		SmartDashboard.putData("Increase Intake Speed", new IncreaseSpeedIntake());
-		SmartDashboard.putData("Intake", new Intake());
-		SmartDashboard.putData("Outtake", new Outtake());
+		SmartDashboard.putData("Intake", new IntakeCube());
+		SmartDashboard.putData("Outtake", new OuttakeCube());
 		SmartDashboard.putData("Stop Intake", new StopIntake());
 		SmartDashboard.putData("All Intake Counterclockwise", new AllIntakeCounterclockwise());
 		SmartDashboard.putData("All Intake Clockwise", new AllIntakeClockwise());

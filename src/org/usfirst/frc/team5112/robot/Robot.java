@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5112.robot.commands.*;
 import org.usfirst.frc.team5112.robot.commands.commandGroups.AutoBaselineCommand;
+import org.usfirst.frc.team5112.robot.commands.commandGroups.AutoCommand;
 import org.usfirst.frc.team5112.robot.commands.commandGroups.AutoScaleCommand;
 import org.usfirst.frc.team5112.robot.commands.commandGroups.AutoSwitchCommand;
 import org.usfirst.frc.team5112.robot.commands.commandGroups.StopEverything;
@@ -25,13 +26,13 @@ public class Robot extends TimedRobot {
 	public static Intake     intake;
 	public static Gripper gripper;
 	
-//	public static String gameData;
-//	public static char[] plateStates; // 'L' if left, 'R' if right
-//	public static char startingPos; // 'L' if left, 'C' if center, 'R' if right
+	public static String gameData;
+	public static char[] plateStates; // 'L' if left, 'R' if right
+	public static char startingPos; // 'L' if left, 'C' if center, 'R' if right
 	
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
-	SendableChooser<Character> startPosition_chooser = new SendableChooser<>();
+	AutoCommand m_autonomousCommand;
+	SendableChooser<AutoCommand> m_chooser = new SendableChooser<>();
+	SendableChooser<String> startPosition_chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -51,18 +52,17 @@ public class Robot extends TimedRobot {
 		intake     = new Intake    ();
 		m_oi       = new OI        ();
 		
-		startPosition_chooser.addDefault("Left Driver Station", 'L');
-		startPosition_chooser.addObject("Center Driver Station", 'C');
-		startPosition_chooser.addObject("Right Driver Station", 'R');
-		SmartDashboard.putData("Start Position", startPosition_chooser);
+		startPosition_chooser.addDefault("Left Driver Station", "L");
+		startPosition_chooser.addObject("Center Driver Station", "C");
+		startPosition_chooser.addObject("Right Driver Station", "R");
+		SmartDashboard.putData("Starting Position", startPosition_chooser);
 		
-		m_chooser.addDefault("Do Nothing", new StopEverything());
-		m_chooser.addObject("Go for Switch (Auto)", new AutoSwitchCommand());     // TODO: Give the command the data it needs (starting position & plate state)
-		m_chooser.addObject("Go for Scale (Auto)", new AutoScaleCommand());       // TODO: Give the command the data it needs (starting position & plate state)
-        m_chooser.addDefault("Default Auto", new StopEverything());
-		m_chooser.addObject("Go for Switch (Auto)", new AutoSwitchCommand());
-		m_chooser.addObject("Go for Scale (Auto)", new AutoScaleCommand());
-		m_chooser.addObject("Go for Baseline (Auto)", new AutoBaselineCommand());
+//		m_chooser.addDefault("Do Nothing", new StopEverything());
+		m_chooser.addDefault("Go for Switch (Auto)", new AutoSwitchCommand());     // TODO: Give the command the data it needs (starting position & plate state)
+//		m_chooser.addObject("Go for Scale (Auto)", new AutoScaleCommand());       // TODO: Give the command the data it needs (starting position & plate state)
+//		m_chooser.addObject("Go for Switch (Auto)", new AutoSwitchCommand());
+//		m_chooser.addObject("Go for Scale (Auto)", new AutoScaleCommand());
+//		m_chooser.addObject("Go for Baseline (Auto)", new AutoBaselineCommand());
 		SmartDashboard.putData("Auto Mode", m_chooser);
 		
 		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(0);
@@ -100,12 +100,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
-//		startingPos = startPosition_chooser.getSelected();
-//		
-//		gameData = DriverStation.getInstance().getGameSpecificMessage();
-//		if (gameData.length() >= 3) 
-//			plateStates = new char[] {gameData.charAt(0), gameData.charAt(1), gameData.charAt(2)};
-//		
+		startingPos = startPosition_chooser.getSelected().charAt(0);
+		
+		System.out.println(startingPos);
+		
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if (gameData.length() >= 3) 
+			plateStates = new char[] {gameData.charAt(0), gameData.charAt(1), gameData.charAt(2)};
+		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -114,6 +116,7 @@ public class Robot extends TimedRobot {
 		 */
 		
 		if (m_autonomousCommand != null) {
+			m_autonomousCommand.init();
 			m_autonomousCommand.start();
 		}
 	}

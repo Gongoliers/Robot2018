@@ -1,29 +1,29 @@
-package org.usfirst.frc.team5112.robot.commands.intake;
+package org.usfirst.frc.team5112.robot.commands.climber;
 
 import org.usfirst.frc.team5112.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Intake extends Command {
+public class RunClimbTopCWW extends Command {
 
-    public Intake() {
-    	requires(Robot.intake);
+    public RunClimbTopCWW() {
+    	requires(Robot.climber);
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.intake.in(Robot.intake.speed);
-    }
+    	Robot.climber.runTopCWW();
+   }
 
     protected boolean isFinished() {
         return false;
     }
 
     protected void end() {
-    }
+   }
 
     protected void interrupted() {
-    }
+  }
 }

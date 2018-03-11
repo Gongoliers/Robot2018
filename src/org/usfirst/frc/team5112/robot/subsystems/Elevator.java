@@ -76,8 +76,9 @@ public class Elevator extends Subsystem {
     		motorController.set((joystick.getY()-0.05)*0.85*100/95+elevatorConstant);
     		SmartDashboard.putNumber("Attack Joystick Value: ", joystick.getY());
 		} else if (joystick.getY() < -.05) {
-    		motorController.set((joystick.getY()+0.05)*0.15*100/95+elevatorConstant * 0.5 + 0.075);
-    		SmartDashboard.putNumber("Attack Joystick Value: ", joystick.getY());
+    	//	motorController.set((joystick.getY()+0.05)*0.15*100/95+elevatorConstant * 0.5 + 0.075);
+    		motorController.set(.05*joystick.getY()*-1);
+			SmartDashboard.putNumber("Attack Joystick Value: ", joystick.getY());
 		} else {
 			motorController.set(0.15 * multiplier);
 		}

@@ -1,29 +1,15 @@
 package org.usfirst.frc.team5112.robot.commands.elevator;
 
-import org.usfirst.frc.team5112.robot.Robot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
-import edu.wpi.first.wpilibj.command.Command;
-
-public class RaiseToSwitch extends Command {
+public class RaiseToSwitch extends CommandGroup {
 
     public RaiseToSwitch() {
-    	requires(Robot.elevator);
+    	
+    	addSequential(new ElevatorReverse(), 0.8);
+    	// TODO
+    	addParallel(new ToggleCubePossession());
+    	addParallel(new ToggleElevatorUse());
     }
 
-    protected void initialize() {
-    	Robot.elevator.stop();
-    }
-
-    protected void execute() {
-    }
-
-    protected boolean isFinished() {
-        return false;
-    }
-
-    protected void end() {
-    }
-
-    protected void interrupted() {
-    }
 }
