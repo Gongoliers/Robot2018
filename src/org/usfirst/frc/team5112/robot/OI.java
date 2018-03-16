@@ -95,7 +95,7 @@ public class OI {
 		SmartDashboard.putData("Raise Elevator To Top", new RaiseToTop());
 		SmartDashboard.putData("Toggle Cube Possession", new ToggleCubePossession());
 		SmartDashboard.putData("Toggle Elevator Use", new ToggleElevatorUse());
-		SmartDashboard.putData("Elevator In Reverse", new ElevatorReverse());
+//		SmartDashboard.putData("Elevator In Reverse", new ElevatorReverse());
 		
 		//Intake Commands
 		SmartDashboard.putData("Decrease Intake Speed", new DecreaseSpeedIntake());

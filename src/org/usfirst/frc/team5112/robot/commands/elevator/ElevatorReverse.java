@@ -6,15 +6,16 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ElevatorReverse extends Command {
 
-    public ElevatorReverse() {
+    public ElevatorReverse(double speed) {
     	requires(Robot.elevator);
+    	Robot.elevator.elevatorSpeed = speed;
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.elevator.rotateCounterClockwise(0.3);
+    	Robot.elevator.rotateCounterClockwise();
     }
 
     protected boolean isFinished() {

@@ -25,7 +25,7 @@ public class Intake extends Subsystem {
 	public static VictorSP leftOuterMotorController = RobotMap.intakeLeftOuterMotorController;
 	public static VictorSP rightOuterMotorController = RobotMap.intakeRightOuterMotorController;
 	public double interval = 0.05;
-	public double speed = 0.00;
+	public double speed = 1.0;
 	public double multiplier = 0.6;
 	public double outerMultiplier = 0.5;
 	public double innerMultiplier = 1;

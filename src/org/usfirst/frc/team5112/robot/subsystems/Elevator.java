@@ -16,8 +16,9 @@ public class Elevator extends Subsystem {
 	public static SpeedControllerGroup motorController = RobotMap.elevatorMotorController;
 	public static double noCubeSpeedConstant = 0.15;
 	public static double withCubeSpeedConstant = 0.19;
-	public static double multiplier = 0;
+	public static double multiplier = 1;
 	public static double elevatorConstant = noCubeSpeedConstant;
+	public static double elevatorSpeed = 0.3;
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new OperatorControlElevator());
@@ -34,8 +35,8 @@ public class Elevator extends Subsystem {
     }
     
     //Rotates the elevator winch counterclockwise
-    public void rotateCounterClockwise(double speed) {
-    	rotateClockwise(-speed);
+    public void rotateCounterClockwise() {
+    	rotateClockwise(elevatorSpeed);
     }
     
     public void switchElevatorMoveState() {

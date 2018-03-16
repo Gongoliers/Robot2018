@@ -6,7 +6,7 @@ public class RaiseToSwitch extends CommandGroup {
 
     public RaiseToSwitch() {
     	
-    	addSequential(new ElevatorReverse(), 0.8);
+//    	addSequential(new ElevatorReverse(), 0.8);
     	// TODO
     	addParallel(new ToggleCubePossession());
     	addParallel(new ToggleElevatorUse());
