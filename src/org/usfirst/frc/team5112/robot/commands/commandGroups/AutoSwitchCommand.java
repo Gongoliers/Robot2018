@@ -127,18 +127,18 @@ public class AutoSwitchCommand extends AutoCommand {
     	if(start == switc) {
     		addSequential(new ToggleCubePossession());
     		addSequential(new ToggleElevatorUse());
-    		addSequential(new ElevatorReverse(0.6), 1.5);
+    		addSequential(new ElevatorReverse(0.4), 1.5);
     		addSequential(new ElevatorReverse(.15), 1.5);
     		System.out.println("If Called");
         	addSequential(new Forwards(), 3);
         	addSequential(new StopDrivetrain());
-//    		addSequential(new OuttakeCube(),3);
+    		addSequential(new OuttakeCube(),3);
     		
     	}
     	else {
     		addSequential(new ToggleCubePossession());
     		addSequential(new ToggleElevatorUse());
-    		addSequential(new ElevatorReverse(0.6), 1.5);
+    		addSequential(new ElevatorReverse(0.4), 1.5);
     		addSequential(new ElevatorReverse(.15), 1);
     		System.out.println("Else Called");
         	addSequential(new Forwards(), 3);

@@ -5,6 +5,10 @@ import org.usfirst.frc.team5112.robot.commands.drivetrain.*;
 
 import com.thegongoliers.output.PID;
 import com.thegongoliers.pathFollowing.SmartDriveTrainSubsystem;
+import com.thegongoliers.input.JoystickTransformer;
+import com.thegongoliers.math.Filter;
+import com.thegongoliers.math.LowPassFilter;
+import com.thegongoliers.math.RateLimiter;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -24,7 +28,12 @@ public class Drivetrain extends SmartDriveTrainSubsystem {
 	public double MAX_THROTTLE = 0.9;
 	public double speed = 0;
 	public double interval = 0.05;
+	public double maxrate = 0.1;
+	public double filtercoef = 0.4;
 	public int type = 0;
+	public Filter ratelimiter = new RateLimiter(maxrate);
+	public Filter lowpass = new LowPassFilter(filtercoef);
+	
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new OperatorControlDrivetrain());
@@ -98,22 +107,21 @@ public class Drivetrain extends SmartDriveTrainSubsystem {
 		SmartDashboard.putNumber("Left Encoder Get", RobotMap.encoderLeft.get());
 		SmartDashboard.putNumber("Left Encoder Rate", RobotMap.encoderLeft.getRate());
 //		SmartDashboard.putNumber("Right Encoder Distance", RobotMap.encoderRight.getRaw());
-		if (type == 0) {
+		
 			setTurbo(joystick, controller);
-			if (joystick.getY() > 0.1 || joystick.getY() < -0.1) {
-				diffDrive.arcadeDrive((joystick.getY() - 0.1) * 10 / 9 * throttle,  joystick.getZ() * -1 * turningThrottle);
-			} else {
-				diffDrive.arcadeDrive(0, joystick.getZ() * -1 * turningThrottle);
-			}
-		} else {
-			setTurbo(joystick, controller);
-			if (controller.getRightYAxis() > 0.1 || controller.getRightYAxis() < -0.1) {
-				diffDrive.arcadeDrive((controller.getRightYAxis() - 0.1) * 10 / 9 * throttle, 0);
-			} else {
-				diffDrive.arcadeDrive(0, controller.getRightXAxis() * -1 * turningThrottle);
-			}
+			double speed = JoystickTransformer.deadzone(joystick.getY(), 0.1);
+			speed = (speed - 0.1)*10/9.0;
+			speed = JoystickTransformer.sensitivity(speed,throttle);
+			speed = lowpass.filter(speed);
+			speed = ratelimiter.filter(speed);
+			diffDrive.arcadeDrive(speed, joystick.getZ() * -1 * turningThrottle);
+//			if (joystick.getY() > 0.1 || joystick.getY() < -0.1) {
+//				diffDrive.arcadeDrive((joystick.getY() - 0.1) * 10 / 9 * throttle,  joystick.getZ() * -1 * turningThrottle);
+//			} else {
+//				diffDrive.arcadeDrive(0, joystick.getZ() * -1 * turningThrottle);
+//			}
 		}
-		}
+		
 
 	@Override
 	public double getAngle() {

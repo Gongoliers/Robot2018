@@ -30,13 +30,13 @@ public class Elevator extends Subsystem {
     }
     
     //Rotates the elevator winch clockwise
-    public void rotateClockwise(double speed) {
+    public void down(double speed) {
     	motorController.set(speed);
     }
     
     //Rotates the elevator winch counterclockwise
-    public void rotateCounterClockwise() {
-    	rotateClockwise(elevatorSpeed);
+    public void up() {
+    	down(elevatorSpeed);
     }
     
     public void switchElevatorMoveState() {
