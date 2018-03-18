@@ -28,7 +28,7 @@ public class Drivetrain extends SmartDriveTrainSubsystem {
 	public double MAX_THROTTLE = 0.9;
 	public double speed = 0;
 	public double interval = 0.05;
-	public double maxrate = 0.1;
+	public double maxrate = 0.01;
 	public double filtercoef = 0.4;
 	public int type = 0;
 	public Filter ratelimiter = new RateLimiter(maxrate);
