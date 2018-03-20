@@ -12,4 +12,4 @@ The FIRST® Robotics Competition (or FRC) is an event where high school-aged tea
 Sure!  If you understand the code, you are free to adapt it to your team's needs.  This code is licensed under the MIT License, so you must provide attribution to The Gongoliers and its developers when using any piece of it in your work.  This program was specifically designed for our robot, so it may require changes if you wish to use any part of this code with your robot.
 
 ## What is the current state of the program?
-This program is currently incomplete and in development.  Parts of it might be unstable or disfunctional.  We are actively working on adding to this program and improving it with frequent updates.
+This program is in development and may not work as intended.  Parts of it might be unstable or disfunctional.  This is the final, functioning code that we used (and are using) in our competitions.  Please keep in mind that this code may not work as intended if installed on other robots.
