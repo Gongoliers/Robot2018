@@ -6,7 +6,7 @@ import org.usfirst.frc.team5112.robot.commands.drivetrain.Forwards;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * Drives forwards at 40% speed for 5 seconds before stopping during auto.
+ * Drives forwards at 70% speed for 3 seconds before stopping during auto.
  */
 public class AutoBaselineCommand extends AutoCommand {
 

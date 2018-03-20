@@ -57,12 +57,10 @@ public class Robot extends TimedRobot {
 		startPosition_chooser.addObject("Right Driver Station", "R");
 		SmartDashboard.putData("Starting Position", startPosition_chooser);
 		
-//		m_chooser.addDefault("Do Nothing", new StopEverything());
-		m_chooser.addDefault("Go for Switch (Auto)", new AutoSwitchCommand());     // TODO: Give the command the data it needs (starting position & plate state)
-//		m_chooser.addObject("Go for Scale (Auto)", new AutoScaleCommand());       // TODO: Give the command the data it needs (starting position & plate state)
-//		m_chooser.addObject("Go for Switch (Auto)", new AutoSwitchCommand());
-//		m_chooser.addObject("Go for Scale (Auto)", new AutoScaleCommand());
-//		m_chooser.addObject("Go for Baseline (Auto)", new AutoBaselineCommand());
+		m_chooser.addDefault("Do Nothing", new StopEverything());
+		m_chooser.addDefault("Switch Auto", new AutoSwitchCommand());     // TODO: Give the command the data it needs (starting position & plate state)
+//		m_chooser.addObject("Scale Auto", new AutoScaleCommand());       // TODO: Give the command the data it needs (starting position & plate state)
+		m_chooser.addObject("Baseline Auto", new AutoBaselineCommand());
 		SmartDashboard.putData("Auto Mode", m_chooser);
 		
 		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(0);
