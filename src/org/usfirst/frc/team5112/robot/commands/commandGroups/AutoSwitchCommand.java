@@ -18,6 +18,14 @@ import com.thegongoliers.pathFollowing.Path;
  */
 public class AutoSwitchCommand extends AutoCommand {
 
+	/**
+	 * If conservativeMode is set to TRUE, the robot will only go for the 
+	 * switch if and only if it is already lined up with the switch directly.
+	 * Otherwise, it will simply only go for baseline.
+	 * 
+	 * If conservativeMode is set to FALSE, the robot will go for the switch
+	 * regardless of position.
+	 */
 	boolean conservativeMode = true;
 
 	private void startRightGoRight() {
