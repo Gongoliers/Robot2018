@@ -48,6 +48,7 @@ public class RobotMap {
 		
 		encoderLeft = new Encoder(2, 3);
 		encoderRight = new Encoder(0, 1);
+		// might be 1028 instead of 4096
 		encoderLeft.setDistancePerPulse(360/4096.0 * 50/24.0 * 6*Math.PI); // TODO: set to recommended values - IN INCHES
 		encoderRight.setDistancePerPulse(360/4096.0 * 50/24.0 * 6*Math.PI); // TODO: set to recommended values - IN INCHES
 		
