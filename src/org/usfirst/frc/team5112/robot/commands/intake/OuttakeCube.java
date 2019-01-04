@@ -22,8 +22,10 @@ public class OuttakeCube extends Command {
     }
 
     protected void end() {
+    	Robot.intake.out(0);
     }
 
     protected void interrupted() {
+    	end();
     }
 }

@@ -6,8 +6,10 @@ import org.usfirst.frc.team5112.robot.commands.drivetrain.*;
 import com.thegongoliers.output.PID;
 import com.thegongoliers.pathFollowing.SmartDriveTrainSubsystem;
 import com.thegongoliers.input.JoystickTransformer;
+import com.thegongoliers.input.odometry.Odometry;
 import com.thegongoliers.math.Filter;
 import com.thegongoliers.math.LowPassFilter;
+import com.thegongoliers.math.MathExt;
 import com.thegongoliers.math.RateLimiter;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -28,11 +30,15 @@ public class Drivetrain extends SmartDriveTrainSubsystem {
 	public double MAX_THROTTLE = 0.9;
 	public double speed = 0;
 	public double interval = 0.05;
-	public double maxrate = 0.02;
+	public double maxrate = 0.045;
 	public double filtercoef = 0.2;
 	public int type = 0;
 	public Filter ratelimiter = new RateLimiter(maxrate);
 	public Filter lowpass = new LowPassFilter(filtercoef);
+	
+	private PID anglePID = new PID(0.02, 0, 0, 5);
+	
+	private PID drivePID = new PID(0.05, 0, 0, 10);
 	
 
 	public void initDefaultCommand() {
@@ -102,11 +108,11 @@ public class Drivetrain extends SmartDriveTrainSubsystem {
 
 	//Allows the operator to control the drivetrain in teleop
 	public void operatorControl(Joystick joystick, LogitechController controller, int type) {
-		SmartDashboard.putNumber("Left Encoder Raw", RobotMap.encoderLeft.getRaw());
-		SmartDashboard.putNumber("Left Encoder Distance", RobotMap.encoderLeft.getDistance());
-		SmartDashboard.putNumber("Left Encoder Get", RobotMap.encoderLeft.get());
-		SmartDashboard.putNumber("Left Encoder Rate", RobotMap.encoderLeft.getRate());
 //		SmartDashboard.putNumber("Right Encoder Distance", RobotMap.encoderRight.getRaw());
+		SmartDashboard.putNumber("Distance: ", Odometry.getDistance(RobotMap.encoderLeft.getDistance(), RobotMap.encoderRight.getDistance()));
+		SmartDashboard.putNumber("Left Distance: ", RobotMap.encoderLeft.getDistance());
+		SmartDashboard.putNumber("Right Distance: ", RobotMap.encoderRight.getDistance());
+		SmartDashboard.putNumber("Gyro Angle: ", RobotMap.gyro.getAngle());
 		
 			setTurbo(joystick, controller);
 			double speed = JoystickTransformer.deadzone(joystick.getY(), 0.1);
@@ -130,7 +136,7 @@ public class Drivetrain extends SmartDriveTrainSubsystem {
 
 	@Override
 	public PID getDriveDistancePID() {
-		return new PID(0.1, 0, 0, 0.01); // TODO: tune this!
+		return drivePID; // TODO: tune this!
 	}
 
 	@Override
@@ -147,7 +153,7 @@ public class Drivetrain extends SmartDriveTrainSubsystem {
 
 	@Override
 	public PID getRotateAnglePID() {
-		return new PID(0.1, 0, 0, 0.01); // TODO: tune this!
+		return anglePID; // TODO: tune this!
 	}
 
 	@Override
@@ -173,17 +179,17 @@ public class Drivetrain extends SmartDriveTrainSubsystem {
 
 	@Override
 	public void forward(double arg0) {
-		forwards(arg0);
+		forwards(MathExt.toRange(arg0, 0, 0.6));
 	}
 
 	@Override
 	public void rotateLeft(double arg0) {
-		rotateCounterclockwise(arg0);
+		rotateCounterclockwise(-arg0);
 	}
 
 	@Override
 	public void rotateRight(double arg0) {
-		rotateClockwise(arg0);
+		rotateClockwise(-arg0);
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class AutoBaselineCommand extends AutoCommand {
     public AutoBaselineCommand() {
     	
     	Robot.drivetrain.speed = 0.7;
-    	addSequential(new Forwards(), 3);
+    	addSequential(new Forwards(), 1.75);
     	
     }
 

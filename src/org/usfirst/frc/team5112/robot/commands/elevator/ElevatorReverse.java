@@ -27,8 +27,13 @@ public class ElevatorReverse extends Command {
     }
 
     protected void end() {
+    	if(Math.abs(speed) > 0.15) {
+    	Robot.elevator.elevatorSpeed = .15;
+    	Robot.elevator.up();
+    	}
     }
 
     protected void interrupted() {
+    	end();
     }
 }

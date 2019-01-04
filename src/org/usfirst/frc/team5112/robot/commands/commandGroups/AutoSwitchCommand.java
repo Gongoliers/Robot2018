@@ -26,7 +26,7 @@ public class AutoSwitchCommand extends AutoCommand {
 	 * If conservativeMode is set to FALSE, the robot will go for the switch
 	 * regardless of position.
 	 */
-	boolean conservativeMode = true;
+	boolean conservativeMode = false;
 
 	private void startRightGoRight() {
 		Path path = new Path(Robot.drivetrain);
@@ -72,42 +72,48 @@ public class AutoSwitchCommand extends AutoCommand {
 		Path path = new Path(Robot.drivetrain);
 		path.addStraightAway(16);
 		path.addRotation(90);
-		path.addStraightAway(28);
+		path.addStraightAway(36);
 		path.addRotation(-90);
 
 		Path path2 = new Path(Robot.drivetrain);
-		path2.addStraightAway(136);
+		path2.addStraightAway(100);
 
 		addSequential(new ToggleCubePossession());
 		addSequential(new ToggleElevatorUse());
 		addSequential(new FollowPathCommand(path));
-		addSequential(new ElevatorReverse(0.4), 1.5);
-		addSequential(new ElevatorReverse(.15), 1.5);
-		addSequential(new FollowPathCommand(path2));
+		addParallel(new ElevatorReverse(0.4), 1.5);
+//		addSequential(new ElevatorReverse(.15), 0.5);
+		addSequential(new FollowPathCommand(path2), 2);
 		addSequential(new StopDrivetrain());
 		addSequential(new OuttakeCube(), 3);
+		addSequential(new ElevatorReverse(0), .5);
+		addSequential(new ElevatorReverse(.2), .25);
+		addSequential(new ElevatorReverse(0.05),8);
 	}
 
 	private void startCenterGoLeft() {
 		Path path = new Path(Robot.drivetrain);
 		path.addStraightAway(16);
 		path.addRotation(-90);
-		path.addStraightAway(30.5);
+		path.addStraightAway(39);
 		path.addRotation(90);
 
 		Path path2 = new Path(Robot.drivetrain);
-		path2.addRotation(136);
+		path2.addStraightAway(100);
 
 		addSequential(new ToggleCubePossession());
 		addSequential(new ToggleElevatorUse());
 		addSequential(new FollowPathCommand(path));
-		addSequential(new ElevatorReverse(0.4), 1.5);
-		addSequential(new ElevatorReverse(.15), 1.5);
-		addSequential(new FollowPathCommand(path2));
+		addParallel(new ElevatorReverse(0.4), 1.5);
+//		addSequential(new ElevatorReverse(.15), 0.5);
+		addSequential(new FollowPathCommand(path2), 2);
 		addSequential(new StopDrivetrain());
 		addSequential(new OuttakeCube(), 3);
+		addSequential(new ElevatorReverse(0), .5);
+		addSequential(new ElevatorReverse(.2), .25);
+		addSequential(new ElevatorReverse(0.05),8);
 	}
-
+	
 	private void startLeftGoRight() {
 		Path path = new Path(Robot.drivetrain);
 		path.addStraightAway(16);
@@ -174,7 +180,7 @@ public class AutoSwitchCommand extends AutoCommand {
 				System.out.println("Baseline only");
 				addSequential(new ToggleCubePossession());
 				addSequential(new ToggleElevatorUse());
-				addSequential(new ElevatorReverse(0.4), 1.5);
+//				addSequential(new ElevatorReverse(0.4), 1.5);
 				addSequential(new ElevatorReverse(.15), 1);
 				addSequential(new Forwards(), 3);
 				addSequential(new StopDrivetrain());

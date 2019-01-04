@@ -6,11 +6,16 @@ import org.usfirst.frc.team5112.robot.commands.commandGroups.AutoBaselineCommand
 import org.usfirst.frc.team5112.robot.commands.commandGroups.AutoScaleCommand;
 import org.usfirst.frc.team5112.robot.commands.commandGroups.AutoSwitchCommand;
 import org.usfirst.frc.team5112.robot.commands.commandGroups.StopEverything;
+import org.usfirst.frc.team5112.robot.commands.commandGroups.TestCommand;
 import org.usfirst.frc.team5112.robot.commands.drivetrain.*;
 import org.usfirst.frc.team5112.robot.commands.elevator.*;
 import org.usfirst.frc.team5112.robot.commands.gripper.CloseGripper;
 import org.usfirst.frc.team5112.robot.commands.gripper.OpenGripper;
 import org.usfirst.frc.team5112.robot.commands.intake.*;
+
+import com.thegongoliers.pathFollowing.FollowPathCommand;
+import com.thegongoliers.pathFollowing.Path;
+import com.thegongoliers.pathFollowing.PathStraightAwayCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -66,7 +71,9 @@ public class OI {
 		
 		jAB6 = new JoystickButton(joystickAttack, 6);
 		jAB7 = new JoystickButton(joystickAttack, 7);
-			
+		
+		jB5.whenPressed(new TestCommand());
+
 		jAB6.whenPressed(new ToggleCubePossession());
 		jAB7.whenPressed(new ToggleElevatorUse());
 		//Climber Commands

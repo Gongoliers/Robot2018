@@ -65,8 +65,13 @@ public class Robot extends TimedRobot {
 		
 		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(0);
 		camera1.setResolution(320, 240);
+		camera1.setBrightness(50);
+		camera1.setExposureAuto();
 		UsbCamera camera2 = CameraServer.getInstance().startAutomaticCapture(1);
 		camera2.setResolution(320, 240);
+		camera2.setBrightness(50);
+		camera2.setExposureAuto();
+
 	}
 
 	/**
